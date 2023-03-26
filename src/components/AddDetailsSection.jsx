@@ -19,10 +19,17 @@ const AddDetailsSection = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const newUser = {
+      name: name,
+      designation: designation,
+      email: email,
+      image: image,
+    };
+
     const users = JSON.parse(localStorage.getItem("userData2")) || [];
-    const newUser = { name, designation, email, image };
     if (!users) {
-      localStorage.setItem("userData2", JSON.stringify([])); //[...users]
+      localStorage.setItem("userData2", JSON.stringify([]));
     }
     localStorage.setItem("userData2", JSON.stringify([...users, newUser]));
 

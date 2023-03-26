@@ -6,10 +6,12 @@ import SearchSection from "../components/SearchSection";
 
 const Home = () => {
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
-    const parsedUserData = JSON.parse(localStorage.getItem("userData2")) || [];
-    setUsers(parsedUserData);
+    const UserData = JSON.parse(localStorage.getItem("userData2")) || [];
+    setUsers(UserData);
   }, []);
+
   // console.log(users);
   return (
     <>
@@ -17,8 +19,8 @@ const Home = () => {
       <Container>
         <SearchSection />
         <CardWrapper>
-          {users.map((user) => (
-            <Card user={user} key={user.id} />
+          {users.map((item) => (
+            <Card user={item} key={item.id} />
           ))}
         </CardWrapper>
       </Container>
@@ -30,6 +32,8 @@ export default Home;
 
 const Container = styled.div`
   margin: 0px 60px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardWrapper = styled.div`
@@ -37,4 +41,5 @@ const CardWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   max-width: 100%;
+  align-items: center;
 `;
