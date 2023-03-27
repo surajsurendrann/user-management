@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import SearchSection from "../components/SearchSection";
-import { stockData } from "../data";
-import { useUser } from "../components/userContext";
+import { UserContext } from "../components/userContext";
 
 const Home = () => {
-  // const [users, setUsers] = useState([]);
+  const { users } = useContext(UserContext);
 
-  const [users, setUsers] = useUser();
-  users.push(...stockData);
-
-  // console.log(users);
   return (
     <>
       <Navbar />

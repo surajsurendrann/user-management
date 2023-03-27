@@ -1,22 +1,54 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { UserContext } from "./userContext";
+import Card from "./Card";
 
 const SearchSection = () => {
+  const { users } = useContext(UserContext);
+  const [searchValue, setSearchValue] = useState("");
+
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
   return (
     <>
-      <SearchContainer>
-        <SearchInput placeholder="search" />
-        <Link to="/adduser">
-          <AddUser>Add User</AddUser>
-        </Link>
-      </SearchContainer>
-      {}
+      <Container>
+        <SearchContainer>
+          <SearchInput
+            placeholder="search"
+            value={searchValue}
+            onChange={handleSearchChange}
+          />
+          <Link to="/adduser">
+            <AddUser>Add User</AddUser>
+          </Link>
+        </SearchContainer>
+
+        <CardContainer>
+          {searchValue &&
+            filteredUsers.map((user) => <Card user={user} key={user.id} />)}
+        </CardContainer>
+        {searchValue && <hr />}
+      </Container>
     </>
   );
 };
 
 export default SearchSection;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CardContainer = styled.div`
+  display: flex;
+`;
 
 const SearchContainer = styled.div`
   margin: 10px 10px;

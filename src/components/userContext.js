@@ -1,34 +1,29 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
+import { stockData } from "../data";
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
-export const useUser = () => {
-  return useContext(UserContext);
-};
-
-const UserProvider = (children) => {
-  const [userData, setUserData] = useState([]);
+export const UserProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const storedUserData = localStorage.getItem("latestData");
-    if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
+    const storedUsers = localStorage.getItem("allusers");
+    if (storedUsers) {
+      setUsers(JSON.parse(storedUsers));
+    } else {
+      localStorage.setItem("allusers", JSON.stringify(stockData));
     }
   }, []);
 
-  useEffect(() => {
-    if (userData) {
-      localStorage.setItem("userData", JSON.stringify(userData));
-    } else {
-      localStorage.removeItem("userData");
-    }
-  }, [userData]);
+  const addUser = (newUser) => {
+    const updatedUsers = [...users, newUser];
+    setUsers(updatedUsers);
+    localStorage.setItem("allusers", JSON.stringify(updatedUsers));
+  };
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ users, addUser }}>
       {children}
     </UserContext.Provider>
   );
 };
-
-export default UserProvider;

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "./userContext";
 
 const AddDetailsSection = () => {
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(null);
+  const { addUser } = useContext(UserContext);
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -26,11 +28,7 @@ const AddDetailsSection = () => {
       image: image,
     };
 
-    const users = JSON.parse(localStorage.getItem("latestData")) || [];
-    if (!users) {
-      localStorage.setItem("latestData", JSON.stringify([]));
-    }
-    localStorage.setItem("latestData", JSON.stringify([...users, newUser]));
+    addUser(newUser);
 
     setName("");
     setDesignation("");
