@@ -1,25 +1,25 @@
-export const userData = [
+export const stockData = [
   {
     id: 1,
-    name: "Vibitha",
+    name: "gopikuttan",
     designation: "developer",
     age: 23,
   },
   {
     id: 2,
-    name: "Suraj",
+    name: "shashankan",
     designation: "developer",
     age: 23,
   },
   {
     id: 3,
-    name: "john",
+    name: "thala",
     designation: "developer",
     age: 23,
   },
   {
     id: 4,
-    name: "Bindhu mummy",
+    name: "snake",
     designation: "developer",
     age: 55,
   },

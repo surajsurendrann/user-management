@@ -3,14 +3,14 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import SearchSection from "../components/SearchSection";
+import { stockData } from "../data";
+import { useUser } from "../components/userContext";
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const UserData = JSON.parse(localStorage.getItem("userData2")) || [];
-    setUsers(UserData);
-  }, []);
+  const [users, setUsers] = useUser();
+  users.push(...stockData);
 
   // console.log(users);
   return (

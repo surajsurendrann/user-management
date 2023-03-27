@@ -6,7 +6,7 @@ import {
   ArrowCircleLeftOutlined,
   ArrowCircleRightOutlined,
 } from "@mui/icons-material";
-import { fontSize } from "@mui/system";
+
 const Navbar = () => {
   const navigate = useNavigate();
 

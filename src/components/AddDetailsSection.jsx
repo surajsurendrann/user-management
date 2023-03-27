@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { userData } from "../data";
 
 const AddDetailsSection = () => {
   const [name, setName] = useState("");
@@ -27,11 +26,11 @@ const AddDetailsSection = () => {
       image: image,
     };
 
-    const users = JSON.parse(localStorage.getItem("userData2")) || [];
+    const users = JSON.parse(localStorage.getItem("latestData")) || [];
     if (!users) {
-      localStorage.setItem("userData2", JSON.stringify([]));
+      localStorage.setItem("latestData", JSON.stringify([]));
     }
-    localStorage.setItem("userData2", JSON.stringify([...users, newUser]));
+    localStorage.setItem("latestData", JSON.stringify([...users, newUser]));
 
     setName("");
     setDesignation("");
@@ -71,41 +70,9 @@ const AddDetailsSection = () => {
       {/* Details Section */}
 
       <DetailsContainer>
-        {/* <Form onSubmit={handleSubmit}>
-          <Label>Name</Label>
-          <Input
-            type="text"
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-
-          <Label>Designation</Label>
-          <Input
-            type="text"
-            value={designation}
-            onChange={(event) => {
-              setDesignation(event.target.value);
-            }}
-          />
-
-          <Label>Email</Label>
-          <Input
-            type="email"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-
-          <ButtonContainer>
-            <SaveButton type="submit">Save</SaveButton>
-          </ButtonContainer>
-        </Form> */}
-
         <Form onSubmit={handleSubmit}>
           <Input
+            required
             type="text"
             placeholder="Enter your name"
             value={name}
@@ -114,6 +81,7 @@ const AddDetailsSection = () => {
             }}
           />
           <Input
+            required
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -122,6 +90,7 @@ const AddDetailsSection = () => {
             }}
           />
           <Input
+            required
             type="text"
             placeholder="Enter your designation"
             value={designation}
@@ -148,23 +117,6 @@ const MainContainer = styled.div`
 const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Label = styled.label`
-  margin-bottom: 10px;
-`;
-// const Input = styled.input`
-//   margin-bottom: 20px;
-//   height: 20px;
-//   width: 250px;
-// `;
-
-const ButtonContainer = styled.div``;
-
-const SaveButton = styled.button`
-  position: absolute;
-  top: 72vh;
-  left: 50vw;
 `;
 
 //Image section
